@@ -32,6 +32,8 @@ new #[Layout('layouts.guest')] class extends Component
 
         Auth::login($user);
 
+        // todo add default role to user
+
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
 }; ?>

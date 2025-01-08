@@ -16,3 +16,6 @@ require __DIR__.'/auth.php';
 
 // todo https://spatie.be/docs/laravel-permission/v3/basic-usage/basic-usages sanget terakhir
 // todo create courses, lessons, etc
+
+Route::resource('/courses', \App\Http\Controllers\CourseController::class);
+Route::resource('/lessons', \App\Http\Controllers\LessonController::class);
