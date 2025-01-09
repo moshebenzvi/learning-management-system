@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lesson;
 use Illuminate\Http\Request;
 
-class LessonController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Lesson::with('course', 'completedByUsers')->get();
+        //
     }
 
     /**
@@ -34,7 +33,7 @@ class LessonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lesson $lesson)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class LessonController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lesson $lesson)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +49,7 @@ class LessonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lesson $lesson)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +57,7 @@ class LessonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(string $id)
     {
         //
     }

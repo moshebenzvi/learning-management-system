@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
         ]);
 
-        User::factory(9)->create();
+        User::factory(9)->create()->each(function ($user) {
+            $user->assignRole('student');
+        });
         Course::factory(20)->create();
         Lesson::factory(100)->create();
 

@@ -28,11 +28,9 @@ new #[Layout('layouts.guest')] class extends Component
 
         $validated['password'] = Hash::make($validated['password']);
 
-        event(new Registered($user = User::create($validated)));
+        event(new Registered($user = User::create($validated)->assignRole('student')));
 
         Auth::login($user);
-
-        // todo add default role to user
 
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
