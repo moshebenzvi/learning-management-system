@@ -43,11 +43,11 @@ new class extends Component
                 </div>
                 @endauth
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')" wire:navigate>
                         {{ __('Course') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
             @guest
             <div class="flex">

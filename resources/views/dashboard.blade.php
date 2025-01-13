@@ -1,3 +1,13 @@
+<?php
+
+use App\Models\Course;
+
+$courses = Course::where('user_id', auth()->id())
+    ->with('instructor')
+    ->withCount(['lessons', 'enrolledUsers'])
+    ->paginate(5);
+
+?>
 <x-app-layout>
     {{--
     <x-slot name="header">
@@ -21,7 +31,7 @@
                                         src="https://i.pravatar.cc/150?img={{ fake()->numberBetween(1, 70) }}"
                                         alt="">
                                     <div class="min-w-0 flex-auto">
-                                        <a href="{{ route('courses.show', $course->id) }}" class="text-sm/6 font-semibold text-gray-900">{{ $course->title }}</a>
+                                        <a href="{{ route('course.show', $course->id) }}" class="text-sm/6 font-semibold text-gray-900">{{ $course->title }}</a>
                                         <p class="mt-1 truncate text-xs/5 text-gray-500">{{ $course->description }}</p>
                                     </div>
                                 </div>
@@ -34,8 +44,8 @@
                         @endforeach
                     </ul>
                     {{-- Course List --}}
-
                 </div>
+                {{ $courses->links() }}
             </div>
         </div>
     </div>

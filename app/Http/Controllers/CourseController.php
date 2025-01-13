@@ -7,17 +7,13 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function welcome()
-    {
-        $courses = Course::with('instructor')->withCount(['lessons', 'enrolledUsers'])->get();
-        return view('dashboard', compact('courses'));
-    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Course::with('instructor', 'lessons', 'enrolledUsers')->get();
+        $courses =  Course::with('instructor', 'lessons', 'enrolledUsers')->get();
+        return view('/dashboard', compact('courses'));
     }
 
     /**
@@ -41,8 +37,8 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $courses = $course->load('instructor', 'lessons');
-        return view('course', compact('courses'));
+        $course = $course->load('instructor', 'lessons');
+        return view('course', compact('course'));
     }
 
     /**
