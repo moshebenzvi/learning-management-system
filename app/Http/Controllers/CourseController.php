@@ -12,7 +12,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses =  Course::with('instructor', 'lessons', 'enrolledUsers')->get();
+        $courses = Course::with('instructor', 'lessons', 'enrolledUsers')->get();
         return view('/dashboard', compact('courses'));
     }
 
@@ -21,7 +21,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course.create');
     }
 
     /**
@@ -29,7 +29,17 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+        $course = Course::create([
+            'user_id' => auth()->user()->id,
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return redirect('/dashboard')->with('success', 'Course created successfully.');
     }
 
     /**
@@ -46,7 +56,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('course.edit', compact('course'));
     }
 
     /**
@@ -54,7 +64,13 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $course->update(request()->all());
+        return redirect('/course/' . $course->id)->with('success', 'Course updated successfully.');
     }
 
     /**
@@ -62,6 +78,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect('/dashboard')->with('success', 'Course deleted successfully.');
     }
 }
