@@ -2,7 +2,9 @@
 
 use App\Models\Course;
 
-$courses = Course::with('instructor')->withCount(['lessons', 'enrolledUsers'])->paginate(5);
+$courses = Course::with('instructor')
+    ->withCount(['lessons', 'enrolledUsers'])
+    ->paginate(5);
 
 ?>
 
@@ -18,30 +20,51 @@ $courses = Course::with('instructor')->withCount(['lessons', 'enrolledUsers'])->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="px-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+//TODO: scrollbar hidden
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Title
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Description
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Instructor
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Detail
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($courses as $course)
+                                    <tr
+                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $course->title }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {{ $course->description }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $course->instructor->name }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $course->lessons_count }} Lessons & {{ $course->enrolled_users_count }}
+                                            Users
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
-                    {{-- Course List --}}
-                    <ul role="list" class="divide-y divide-gray-100">
-                        @foreach ($courses as $course)
-                            <li class="flex justify-between gap-x-6 py-5">
-                                <div class="flex min-w-0 gap-x-4">
-                                    <img class="size-12 flex-none rounded-full bg-gray-50"
-                                        src="https://i.pravatar.cc/150?img={{ fake()->numberBetween(1, 70) }}"
-                                        alt="">
-                                    <div class="min-w-0 flex-auto">
-                                        <a href="{{ route('course.show', $course->id) }}" class="text-sm/6 font-semibold text-gray-900">{{ $course->title }}</a>
-                                        <p class="mt-1 truncate text-xs/5 text-gray-500">{{ $course->description }}</p>
-                                    </div>
-                                </div>
-                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm/6 text-gray-900">{{ $course->instructor->name }}</p>
-                                    <p class="mt-1 text-xs/5 text-gray-500">{{ $course->lessons_count }} Lesson <time
-                                            datetime="2023-01-23T13:23Z">& {{ $course->enrolled_users_count }} User</time></p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                    {{-- Course List --}}
                 </div>
                 {{ $courses->links() }}
             </div>

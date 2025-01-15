@@ -31,8 +31,8 @@ new class extends Component
                 <!-- Navigation Links -->
                 @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('course.index')" :active="request()->routeIs('course.*')" wire:navigate>
+                        {{ __('Course') }}
                     </x-nav-link>
                 </div>
                 @else

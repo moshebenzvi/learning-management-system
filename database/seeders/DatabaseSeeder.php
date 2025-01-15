@@ -25,6 +25,14 @@ class DatabaseSeeder extends Seeder
         });
 
         User::create([
+            'name' => "Student ".fake()->name(),
+            'email' => 'student@gmail.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+        ])->assignRole('student');
+
+        User::create([
             'name' => "Instructor ".fake()->name(),
             'email' => 'instructor@gmail.com',
             'password' => bcrypt('password'),

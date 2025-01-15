@@ -12,8 +12,12 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('instructor', 'lessons', 'enrolledUsers')->get();
-        return view('/dashboard', compact('courses'));
+        $courses = Course::where('user_id', auth()->id())
+            ->with('instructor')
+            ->withCount(['lessons', 'enrolledUsers'])
+            ->paginate(5);
+
+        return view('course.index', compact('courses'));
     }
 
     /**
@@ -48,7 +52,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $course = $course->load('instructor', 'lessons');
-        return view('course', compact('course'));
+        return view('course.show', compact('course'));
     }
 
     /**

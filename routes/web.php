@@ -20,4 +20,6 @@ Route::view('profile', 'profile')
 
 require __DIR__.'/auth.php';
 
+Route::redirect('/dashboard', '/course');
+
 // Route::resource('/admin', AdminController::class);
