@@ -35,6 +35,11 @@ new class extends Component
                         {{ __('Course') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('enrollment.index')" :active="request()->routeIs('enrollment.*')" wire:navigate>
+                        {{ __('Enrollment') }}
+                    </x-nav-link>
+                </div>
                 @else
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="/" :active="request()->is('/')" wire:navigate>
