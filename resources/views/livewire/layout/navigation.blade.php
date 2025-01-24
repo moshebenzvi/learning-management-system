@@ -29,15 +29,17 @@ new class extends Component
                 </div>
 
                 <!-- Navigation Links -->
+                @role('admin')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.*')" wire:navigate>
+                        {{ __('Admin') }}
+                    </x-nav-link>
+                </div>
+                @endrole
                 @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('course.index')" :active="request()->routeIs('course.*')" wire:navigate>
                         {{ __('Course') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('enrollment.index')" :active="request()->routeIs('enrollment.*')" wire:navigate>
-                        {{ __('Enrollment') }}
                     </x-nav-link>
                 </div>
                 @else
