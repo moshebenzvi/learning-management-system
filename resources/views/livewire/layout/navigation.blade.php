@@ -29,22 +29,27 @@ new class extends Component
                 </div>
 
                 <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate.hover>
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
                 @role('admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.*')" wire:navigate>
+                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')" wire:navigate.hover>
                         {{ __('Admin') }}
                     </x-nav-link>
                 </div>
                 @endrole
                 @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('course.index')" :active="request()->routeIs('course.*')" wire:navigate>
+                    <x-nav-link :href="route('course.index')" :active="request()->routeIs('course.*')" wire:navigate.hover>
                         {{ __('Course') }}
                     </x-nav-link>
                 </div>
                 @else
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="/" :active="request()->is('/')" wire:navigate>
+                    <x-nav-link href="/" :active="request()->is('/')" wire:navigate.hover>
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
@@ -59,12 +64,12 @@ new class extends Component
             @guest
             <div class="flex">
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate.hover>
                         {{ __('Login') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('register')" :active="request()->routeIs('login')" wire:navigate>
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('login')" wire:navigate.hover>
                         {{ __('Register') }}
                     </x-nav-link>
                 </div>
@@ -87,7 +92,7 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                        <x-dropdown-link :href="route('profile')" wire:navigate.hover>
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -119,7 +124,7 @@ new class extends Component
     @auth
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate.hover>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
@@ -132,7 +137,7 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                <x-responsive-nav-link :href="route('profile')" wire:navigate.hover>
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 

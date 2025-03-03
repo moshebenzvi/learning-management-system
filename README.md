@@ -2,6 +2,7 @@
 
 Here’s a more detailed breakdown of **Learning Management System (LMS)** project using Laravel:
 
+<!-- DESAIN : https://dribbble.com/shots/7296254-Einstar-LMS-Courses-Animation -->
 ---
 
 ### **Core Features of the LMS**
